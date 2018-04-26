@@ -1,17 +1,28 @@
+require 'pry'
+
 class School
- attr_reader :name
- attr_accessor :
+
+ attr_reader :name,:roster
+
 
 def initialize(name)
   @name = name
+  @roster = {}
 end
 
-def roster=(roster)
- @roster = {}
+def add_student(student_name, grade)
+  roster[grade] ||= []
+  roster[grade] << student_name
 end
 
-def roster
-  @roster
+def grade(student_grade)
+  roster[student_grade]
+end
+
+def sort
+  group = {}
+  roster.each {|grade, students| group[grade] = students.sort}
+    group
 end
 
 end
