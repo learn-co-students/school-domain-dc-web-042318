@@ -1,28 +1,36 @@
 # code here!
-class School 
-    attr_reader :name
-    attr_accessor :roster
+require 'pry'
 
+class School 
+
+    attr_accessor :roster, :name
+#binding.pry 
     def initialize(name)
-        @roster = {}
-        @name = name    
+        @roster = {} #Hash.new(Array.new)
+        @name = name 
     end
+    
     def add_student(student, grade)
-        @roster[grade] = []
-        @roster.each do |key, value|
-            puts @roster[key]
-            if @roster[key] == grade
-        @roster[key] << student
-            end
-        @roster[grade] = [student]
-        end    
+        @roster[grade] ||= []
+        @roster[grade] << student
     end
-    def self.grade(grade)
+
+    def grade(grade)
         @roster[grade]
     end
-    def self.sort
-        @roster[grade].sort 
-        puts @roster[grade]
+
+    def sort
+    sorted = {}
+    @roster.each do |grade, students|
+      sorted[grade] = students.sort
     end
+    sorted
+  end
 
 end
+kasia = School.new("JHU")
+kasia.add_student("kasia", 2)
+kasia.add_student("bob", 7)
+kasia.add_student("foo", 2)
+
+puts "done"
